@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Appointments</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4fff6;
+      margin: 0;
+      padding: 0;
+    }
+
+    h2 {
+      text-align: center;
+      color: #064e3b;
+      background: linear-gradient(to right, #b9f3cd, #d8f8e3);
+      padding: 20px;
+      margin: 0 0 20px;
+      border-bottom: 3px solid #064e3b;
+    }
+
+    .top-panel {
+      display: flex;
+      justify-content: space-around;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      margin: 20px auto;
+      width: 90%;
+      gap: 20px;
+    }
+
+    .search-box, .add-container {
+      flex: 1;
+      min-width: 260px;
+      background: #ffffff;
+      padding: 18px;
+      border-radius: 12px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+      height: fit-content;
+    }
+
+    .search-box h3, .add-container h3 {
+      color: #1b8a5e;
+      text-align: center;
+      margin-bottom: 12px;
+    }
+
+    .search-box form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .search-box input {
+      width: 90%;
+      padding: 8px;
+      border-radius: 6px;
+      border: 1px solid #a1d6a1;
+      outline: none;
+    }
+
+    .search-box button {
+      background-color: #1b8a5e;
+      color: white;
+      border: none;
+      padding: 8px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+      width: 95%;
+    }
+
+    .search-box button:hover {
+      background-color: #146c47;
+    }
+
+    .add-container {
+      text-align: center;
+      position: relative;
+    }
+
+    .add-container p {
+      color: #555;
+      font-size: 14px;
+      margin-bottom: 12px;
+    }
+
+    .toggle-btn {
+      background-color: #1b8a5e;
+      color: white;
+      border: none;
+      padding: 10px 25px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 15px;
+      transition: 0.3s;
+    }
+
+    .toggle-btn:hover {
+      background-color: #146c47;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    .add-form {
+      display: none;
+      margin-top: 15px;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      transition: all 0.4s ease-in-out;
+    }
+
+    .add-form input, .add-form select {
+      padding: 8px;
+      border-radius: 6px;
+      border: 1px solid #a1d6a1;
+      width: 48%;
+      outline: none;
+      transition: 0.3s;
+    }
+
+    .add-form input:focus, .add-form select:focus {
+      border-color: #1b8a5e;
+      box-shadow: 0 0 6px rgba(27, 138, 94, 0.4);
+    }
+
+    .add-form button {
+      background-color: #1b8a5e;
+      color: white;
+      border: none;
+      padding: 8px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+      width: 100%;
+    }
+
+    .add-form button:hover {
+      background-color: #146c47;
+    }
+
+    table {
+      width: 90%;
+      margin: 30px auto;
+      border-collapse: collapse;
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    th {
+      background-color: #1b8a5e;
+      color: white;
+      padding: 12px;
+      text-align: left;
+    }
+
+    td {
+      padding: 10px;
+      border-bottom: 1px solid #c6e9c8;
+    }
+
+    tr:hover {
+      background-color: #e8f9ee;
+    }
+
+    a {
+      text-decoration: none;
+      color: #1b8a5e;
+      font-weight: 500;
+      border: 1px solid #1b8a5e;
+      padding: 5px 10px;
+      border-radius: 8px;
+      transition: 0.3s;
+    }
+
+    a:hover {
+      background-color: #1b8a5e;
+      color: white;
+    }
+
+    p {
+      text-align: center;
+      margin: 30px 0;
+    }
+
+    p a {
+      background-color: #bff0c9;
+      padding: 8px 15px;
+      border-radius: 10px;
+      color: #064e3b;
+      border: 1px solid #1b8a5e;
+      transition: 0.3s;
+    }
+
+    p a:hover {
+      background-color: #1b8a5e;
+      color: white;
+    }
+
+    footer {
+      background-color: #064e3b;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+
+<body>
+  <h2>Appointments</h2>
+
+  <div class="top-panel">
+    <!-- 🔍 Search Appointment -->
+    <div class="search-box">
+      <h3>Search Appointment</h3>
+      <form method="post" action="/appointments">
+        <input type="text" name="search" placeholder="Search by patient or doctor name..." value="{{ search }}">
+        <button type="submit">Search</button>
+      </form>
+    </div>
+
+    <!-- ➕ Add Appointment -->
+    <div class="add-container">
+      <h3>Manage Appointments</h3>
+      <p>Click below to book a new appointment.</p>
+      <button class="toggle-btn" onclick="toggleForm()">Add New Appointment</button>
+
+      <form method="post" action="/appointment/add" class="add-form" id="addForm">
+        <input name="patient_id" placeholder="Patient ID" required>
+        <input name="doctor_id" placeholder="Doctor ID" required>
+        <input type="date" name="appointment_date" required>
+        <input type="time" name="appointment_time" required>
+        <select name="status" required>
+          <option value="Scheduled">Scheduled</option>
+          <option value="Completed">Completed</option>
+          <option value="Cancelled">Cancelled</option>
+        </select>
+        <button type="submit">Book Appointment</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- 📋 Appointments Table -->
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>Patient ID</th>
+      <th>Patient</th>
+      <th>Doctor ID</th>
+      <th>Doctor</th>
+      <th>Date</th>
+      <th>Time</th>
+      <th>Status</th>
+    </tr>
+    {% for a in appointments %}
+      <tr>
+        <td>{{ a[0] }}</td>
+        <td>{{ a[1] }}</td>
+        <td>{{ a[2] }}</td>
+        <td>{{ a[3] }}</td>
+        <td>{{ a[4] }}</td>
+        <td>{{ a[5] }}</td>
+        <td>{{ a[6] }}</td>
+        <td>{{ a[7] }}</td>
+      </tr>
+    {% endfor %}
+  </table>
+
+  {% if no_results %}
+  <div style="text-align:center; margin-top:20px; color:#b30000; font-weight:bold;">
+    ⚠️ No appointments found for "{{ search }}".
+  </div>
+  {% endif %}
+
+  <p><a href="/dashboard">Back to Dashboard</a></p>
+
+  <footer>
+    <p>📍 Gujranwala, Pakistan — Opposite Chase Up Mall</p>
+    <p>📞 Contact: +92 300 1234567 | ✉️ Email: info@hospital.com</p>
+  </footer>
+
+  <script>
+    function toggleForm() {
+      const form = document.getElementById('addForm');
+      form.style.display = form.style.display === 'none' || form.style.display === '' ? 'flex' : 'none';
+    }
+  </script>
+</body>
+</html>

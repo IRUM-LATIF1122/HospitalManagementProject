@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="dashboard-header">
+  <div>
+    <h1>🌿 Virtual Hospital Dashboard</h1>
+    <p>Welcome to your hospital management system — manage doctors, patients, and appointments efficiently.</p>
+  </div>
+
+  <!-- ✅ Added Logout button -->
+<!--  <form action="{{ url_for('logout') }}" method="post" style="display:inline;">-->
+<!--  <button type="submit" class="logout-btn">Logout</button>-->
+<!--  </form>-->
+  <div class="header-right">
+    <form action="{{ url_for('logout') }}" method="post">
+      <button type="submit" class="logout-btn">Logout</button>
+    </form>
+  </div>
+
+</div>
+
+<div class="dashboard">
+  <div class="card patient-card">
+    <h3>Patients</h3>
+    <p>{{ patients }}</p>
+    <a href="{{ url_for('patients') }}" class="btn">View Details</a>
+  </div>
+
+  <div class="card doctor-card">
+    <h3>Doctors</h3>
+    <p>{{ doctors }}</p>
+    <a href="{{ url_for('doctors') }}" class="btn">View Details</a>
+  </div>
+
+  <div class="card appointment-card">
+    <h3>Appointments</h3>
+    <p>{{ appointments }}</p>
+    <a href="{{ url_for('appointments') }}" class="btn">View Details</a>
+  </div>
+</div>
+
+{% endblock %}

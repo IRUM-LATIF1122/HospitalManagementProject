@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Doctor Dashboard</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #d8fff0, #b2f2e1);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .dashboard-container {
+      background-color: #fff;
+      width: 85%;
+      max-width: 900px;
+      margin-top: 60px;
+      padding: 30px 40px;
+      border-radius: 15px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      color: #008b6f;
+      text-align: center;
+      font-size: 1.8em;
+      margin-bottom: 10px;
+    }
+
+    h3 {
+      color: #009e81;
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 25px;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 12px 15px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #00b894;
+      color: white;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f8fefc;
+    }
+
+    tr:hover {
+      background-color: #e0fff3;
+      transition: background-color 0.3s ease;
+    }
+
+    td {
+      color: #333;
+    }
+
+    .logout-btn {
+      display: inline-block;
+      background-color: #00b894;
+      color: white;
+      text-decoration: none;
+      padding: 10px 25px;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 500;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .logout-btn:hover {
+      background-color: #009e81;
+      transform: scale(1.05);
+    }
+
+    footer {
+      text-align: center;
+      color: #555;
+      font-size: 13px;
+      margin-top: auto;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard-container">
+    <h2>Welcome, Dr. {{ doctor_name }}</h2>
+    <h3>Your Appointments</h3>
+
+    <table>
+      <tr>
+        <th>ID</th>
+        <th>Patient</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Status</th>
+      </tr>
+      {% for a in appointments %}
+        <tr>
+          <td>{{ a[0] }}</td>
+          <td>{{ a[1] }}</td>
+          <td>{{ a[2] }}</td>
+          <td>{{ a[3] }}</td>
+          <td>{{ a[4] }}</td>
+        </tr>
+      {% endfor %}
+    </table>
+
+    <div style="text-align:center;">
+      <a href="/" class="logout-btn">Logout</a>
+    </div>
+  </div>
+
+  <footer>© 2025 Hospital Management System</footer>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Hospital Management System - Login</title>
+  <style>
+    /* General Page Styling */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #d8fff0, #b2f2e1);
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Login Container */
+    .login-container {
+      background-color: #ffffff;
+      width: 350px;
+      padding: 40px 30px;
+      border-radius: 15px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      transition: transform 0.2s ease-in-out;
+    }
+
+    .login-container:hover {
+      transform: scale(1.02);
+    }
+
+    h2 {
+      margin-bottom: 25px;
+      color: #008b6f;
+      font-weight: 600;
+      font-size: 1.5em;
+    }
+
+    /* Input fields */
+    label {
+      display: block;
+      text-align: left;
+      margin-bottom: 5px;
+      color: #333;
+      font-weight: 500;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccece3;
+      border-radius: 8px;
+      outline: none;
+      transition: border-color 0.3s ease;
+    }
+
+    input:focus {
+      border-color: #2ec4a6;
+      box-shadow: 0 0 5px rgba(46, 196, 166, 0.3);
+    }
+
+    /* Button */
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #00b894;
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #009e81;
+    }
+
+    /* Flash messages */
+    .flash-messages {
+      margin-top: 15px;
+      color: #e63946;
+      font-size: 14px;
+      text-align: left;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <h2>Hospital Management System</h2>
+    <form method="post" action="/login">
+      <label>Username</label>
+      <input name="username" placeholder="Enter your username" required>
+
+      <label>Password</label>
+      <input name="password" type="password" placeholder="Enter your password" required>
+
+      <button type="submit">Login</button>
+    </form>
+
+    <div class="flash-messages">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          <ul>
+            {% for cat,msg in messages %}
+              <li><b>{{cat}}:</b> {{msg}}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      {% endwith %}
+    </div>
+  </div>
+</body>
+</html>

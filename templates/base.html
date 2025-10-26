@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Hospital Management System</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <header class="navbar">
+    <div class="logo">
+      <img src="https://cdn-icons-png.flaticon.com/512/2966/2966327.png" alt="Hospital Logo">
+      <h2>HospitalCare</h2>
+    </div>
+    <nav class="nav-links">
+      <a href="{{ url_for('dashboard') }}">Dashboard</a>
+      <a href="{{ url_for('doctors') }}">Doctors</a>
+      <a href="{{ url_for('patients') }}">Patients</a>
+      <a href="{{ url_for('appointments') }}">Appointments</a>
+      <a href="{{ url_for('billing') }}">Billing</a>
+    </nav>
+  </header>
+
+  <div class="content-wrapper">
+    {% block content %}{% endblock %}
+  </div>
+
+    <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-info">
+        <h3>🏥 HospitalCare</h3>
+        <p>Providing trusted healthcare management solutions.</p>
+      </div>
+
+      <div class="footer-contact">
+        <h4>Contact Us</h4>
+        <p><strong>📍 Address:</strong> Opposite Chase Up Mall, Gujranwala, Pakistan</p>
+        <p><strong>📧 Email:</strong> info@hospitalcare.com</p>
+        <p><strong>📞 Phone:</strong> +92 300 1234567</p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2025 HospitalCare | All rights reserved</p>
+    </div>
+  </footer>
+
+</body>
+
+</html>
